@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Guessing Game</title>
+  </head>
+  <body>
+
+    <h1>Guessing Game</h1>
+
+    <p>Random number: <span id="demo"></span></p>
+
+    <div id="output"></div>
+
+    <script>
+      var randomNumber = Math.floor(Math.random() * 10) + 1;
+      document.getElementById("demo").innerHTML = randomNumber;
+
+      var guessCount = 0;
+      var correct = false;
+
+      while (correct === false) {
+
+        var guessText = prompt("Enter a guess between 1 and 10");
+
+        // If user presses Cancel, skip this loop
+        if (guessText === null) {
+          continue;
+        }
+
+        var guess = parseInt(guessText);
+
+        // If guess is not a number, skip this loop
+        if (isNaN(guess)) {
+          continue;
+        }
+
+        guessCount = guessCount + 1;
+
+        var message = "You guessed " + guess + ". ";
+
+        if (guess > randomNumber) {
+          message = message + "Your guess is too high. Guess again.";
+        }
+
+        if (guess < randomNumber) {
+          message = message + "Your guess is too low. Guess again.";
+        }
+
+        if (guess === randomNumber) {
+          message = message + "You guessed it in " + guessCount + " guesses!";
+          correct = true;
+        }
+
+        // ALWAYS prints the message
+        var oldStuff = document.getElementById("output").innerHTML;
+        document.getElementById("output").innerHTML = oldStuff + "<p>" + message + "</p>";
+      }
+    </script>
+
+  </body>
+</html>
